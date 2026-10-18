@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff; --bg2: #eef3fb; --ink: #0a1f44; --mute: #4a5a78; --line: #c9d4e8; --emink: #067a54;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0b1730; --bg2: #0f1f40; --ink: #e8eef9; --mute: #9db0d3; --line: #233559; --emink: #19e39a; }
+}
+
+@theme inline {
+  --color-navy: #0a1f44;
+  --color-brand: #1f5bff;
+  --color-em: #19e39a;
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-emink: var(--emink);
+  --font-sans: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, Menlo, Consolas, monospace;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { font-size: 17px; line-height: 1.6; }
+:focus-visible { outline: 3px solid var(--color-em); outline-offset: 3px; }
+
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.btn {
+  display: inline-block; background: var(--color-em); color: var(--color-navy);
+  font-weight: 700; padding: .75rem 1.4rem; border: 0; cursor: pointer; text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--color-brand); }
+.btn:disabled { opacity: .6; cursor: wait; transform: none; box-shadow: none; }
+.btn-ghost { background: #fff; color: var(--color-navy); }
+
+/* hero: schema animato */
+.wire { fill: none; stroke: var(--color-brand); stroke-width: 2; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 2.2s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade { to { opacity: 1; } }
+.appear { opacity: 0; animation: fade .5s forwards; }
+.node rect { fill: var(--color-navy); stroke: #8fa6d4; stroke-width: 1.5; transition: all .2s; }
+.node text { fill: #fff; font: 500 13px var(--font-mono); }
+.node .num { fill: #8fa6d4; }
+.node { cursor: pointer; outline: none; }
+.node:hover rect, .node:focus rect { stroke: var(--color-em); fill: #0f3a4a; }
+.node:hover .num, .node:focus .num { fill: var(--color-em); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .wire { animation: none; stroke-dashoffset: 0; }
+  .appear { animation: none; opacity: 1; }
+  .btn { transition: none; }
+}
